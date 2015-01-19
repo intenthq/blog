@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<h1>Intent HQ Engineering Blog</h1>
+
+<ul>
+  {% for post in paginator.posts %}
+  <li>
+    <article>
+      <span>{{ post.date | date: "%b %-d, %Y" }}</span>
+      <h1>
+        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </h1>
+      <p>
+        {{ post.excerpt }}
+      </p>
+    </article>
+  </li>
+  {% endfor %}
+</ul>
+
+<p>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+<!-- Pagination links -->
+<footer>
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+  {% endif %}
+  {% if paginator.total_pages > 1 %}
+    <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+  {% endif %}
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+  {% endif %}
+</footer>
