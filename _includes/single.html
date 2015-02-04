@@ -1,0 +1,14 @@
+<header style="background-image:url('{% if paginator.page > 0 %}{{ paginator.posts.first.image }}{% else %}{{ page.image }}{% endif %}')">
+  <div>
+    <h1>{% if paginator.page > 0 %}{{ paginator.posts.first.title }}{% else %}{{ page.title }}{% endif %}</h1>
+  </div>
+</header>
+<article>
+  {% if paginator.page > 0 %}
+      <aside>{{ paginator.posts.first.date | date: "%b %-d, %Y" }}{% if paginator.posts.first.author %} • {{ paginator.posts.first.author }}{% endif %}{% if paginator.posts.first.meta %} • {{ paginator.posts.first.meta }}{% endif %}</aside>
+     {{ paginator.posts.first.content }}
+  {% else %}
+      <aside>{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</aside>
+      {{ content }}
+  {% endif %}
+</article>

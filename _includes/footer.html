@@ -1,7 +1,37 @@
 <footer>
-  <h2>{{ site.title }}</h2>
-  <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-  <aside>
-    {{ site.description }}
-  </aside>
+    <aside class="about">
+      <h3>{{ site.title }}</h3>
+      <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      <p>
+        This is some nice description
+      </p>
+      <p>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+    </aside>
+    <aside class="links">
+      <h4>What else?</h4>
+      <ul>
+          <li><a href="http://intenthq.com/">Company Website</a></li>
+          <li><a href="http://intenthq.com/blog/">Company Blog</a></li>
+          <li><a href="http://intenthq.com/about-intent">Meet the Team</a></li>
+          <li><a href="http://intenthq.com/about-intent#join-us">Join Us</a></li>
+      </ul>
+    </aside>
+    <aside class="social">
+        <h4>Intent HQ</h4>
+        <ul>
+            <li><a href="mailto:hello@intenthq.com">hello@intenthq.com</a></li>
+            <li><a href="tel:+44 (0)20 7636 4400">+44 (0)20 7636 4400</a></li>
+        </ul>
+        <ul class="icons">
+            <li><a href="https://twitter.com/Intent_HQ">&#xe800;</a></li>
+            <li><a href="https://www.facebook.com/IntentHQ">&#xe802;</a></li>
+            <li><a href="http://www.linkedin.com/company/intent-hq">&#xe806;</a></li>
+            <li><a href="https://plus.google.com/105462933702465841477/posts">&#xe801;</a></li>
+            <li><a href="http://www.youtube.com/channel/UC1cOb3gpu5AddY51cRP9IJw?feature=watch">&#xe803;</a></li>
+            <li><a href="http://vimeo.com/intenthq">&#xe804;</a></li>
+        </ul>
+    </aside>
+    <aside class="copyright">
+      <span>© 2015 Intent HQ</span><span><a href="http://intenthq.com/terms-and-conditions/">Terms and Conditions</a></span><span><a href="http://intenthq.com/privacy-policy/">Privacy Policy</a></span><span><a href="http://intenthq.com/api-licence-agreement/">API Licence Agreement</a></span>
+    </aside>
 </footer>

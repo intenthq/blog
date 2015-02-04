@@ -2,35 +2,50 @@
 layout: default
 ---
 
-<h1>Intent HQ Engineering Blog</h1>
+{% if paginator.previous_page %}
+  {% include archive.html %}
+  <ul>
+    {% for post in paginator.posts %}
+    <li>
+      <article style="background-image: url('{{post.thumbnail}}');">
+        <div>
+          <h1>
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </h1>
+          <p>{{ post.date | date: "%-d %b, %Y" }}</o>
+        </div>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  {% include single.html %}
+  <ul>
+    {% for post in paginator.posts offset:1 %}
+    <li>
+      <article style="background-image: url('{{post.thumbnail}}');">
+        <div>
+          <h1>
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </h1>
+          <p>{{ post.date | date: "%-d %b, %Y" }}</o>
+        </div>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+{% endif %}
 
-<ul>
-  {% for post in paginator.posts %}
-  <li>
-    <article>
-      <span>{{ post.date | date: "%b %-d, %Y" }}</span>
-      <h1>
-        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-      </h1>
-      <p>
-        {{ post.excerpt }}
-      </p>
-    </article>
-  </li>
-  {% endfor %}
-</ul>
-
-<p>Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 <!-- Pagination links -->
 <footer>
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="previous">Previous</a>
+    <a href="{{ paginator.previous_page_path }}">&lt;</a>
   {% endif %}
   {% if paginator.total_pages > 1 %}
-    <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
+    <span class="page_number ">More Posts</span>
   {% endif %}
   {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
+    <a href="{{ paginator.next_page_path }}">&gt;</a>
   {% endif %}
 </footer>

@@ -1,8 +1,6 @@
 # Site settings
 title: Intent HQ Engineering blog
 email: engineering@intenthq.com
-description: > # this means to ignore newlines until "baseurl:"
-  This is some nice description
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://engineering.intenthq.com" # the base hostname & protocol for your site
 twitter_username: intenthq

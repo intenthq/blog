@@ -2,6 +2,7 @@
 layout: post
 title:  "Heisenberg ipsum"
 date:   2015-01-15 17:19:56
+thumbnail: http://lorempixel.com/730/300/business/
 categories: category1
 ---
 I'm sorry, what were you asking me? Oh, yes, that stupid plastic container I asked you to buy. You see, hydrofluoric acid won't eat through plastic. It will, however, dissolve metal, rock, glass, ceramic. So there's that. How about something with some protein, maybe? Something green, huh? How are you even alive?
@@ -20,5 +21,7 @@ print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
 
-When $a \ne 0$, there are two solutions to $(ax^2 + bx + c = 0)$ and they are
+When $$a \ne 0$$, there are two solutions to $$(ax^2 + bx + c = 0)$$ and they are
 $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+
+la ra la la la $$x = {-b \pm \sqrt{b^2-4ac} \over 2a} $$
