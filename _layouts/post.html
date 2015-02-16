@@ -1,4 +1,22 @@
 ---
 layout: default
 ---
+{% assign post = page %}
 {% include single.html %}
+<nav>
+  <ul>
+    {% assign page_limit = 6 %}
+    {% for post in site.posts limit: 6 %}
+      {% if post.id == page.id %}
+        {% assign page_limit = 7 %}
+      {% endif %}
+    {% endfor %}
+
+    {% for post in site.posts limit: page_limit %}
+      {% unless post.id == page.id %}
+        {% include post-item.html %}
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</nav>
+{% include more-posts.html %}

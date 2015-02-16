@@ -6,7 +6,6 @@ url: "http://engineering.intenthq.com" # the base hostname & protocol for your s
 twitter_username: intenthq
 github_username:  intenthq
 permalink: /:year/:month/:title/
-paginate: 5
 
 # Build settings
 markdown: kramdown

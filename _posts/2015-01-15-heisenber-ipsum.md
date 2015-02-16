@@ -1,7 +1,9 @@
 ---
 layout: post
+author: sdfsdf
 title:  "Heisenberg ipsum"
 date:   2015-01-15 17:19:56
+image: http://lorempixel.com/1460/600/business/
 thumbnail: http://lorempixel.com/730/300/business/
 categories: category1
 ---

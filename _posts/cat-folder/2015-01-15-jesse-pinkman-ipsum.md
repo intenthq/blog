@@ -1,5 +1,6 @@
 ---
 layout: post
+author: dsfds
 title:  "Jesse Pinkman Ipsum"
 image: http://lorempixel.com/1460/600/technics/
 thumbnail: http://lorempixel.com/730/300/technics/

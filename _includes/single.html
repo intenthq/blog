@@ -1,14 +1,17 @@
-<header style="background-image:url('{% if paginator.page > 0 %}{{ paginator.posts.first.image }}{% else %}{{ page.image }}{% endif %}')">
+<header style="background-image:url('{{ post.image }}')">
   <div>
-    <h1>{% if paginator.page > 0 %}{{ paginator.posts.first.title }}{% else %}{{ page.title }}{% endif %}</h1>
+    <h1>{{ post.title }}</h1>
   </div>
 </header>
 <article>
-  {% if paginator.page > 0 %}
-      <aside>{{ paginator.posts.first.date | date: "%b %-d, %Y" }}{% if paginator.posts.first.author %} • {{ paginator.posts.first.author }}{% endif %}{% if paginator.posts.first.meta %} • {{ paginator.posts.first.meta }}{% endif %}</aside>
-     {{ paginator.posts.first.content }}
-  {% else %}
-      <aside>{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</aside>
-      {{ content }}
-  {% endif %}
+  <h2>{{ post.excerpt }}</h2>
+  {{ content }}
 </article>
+
+<aside>
+  <ul>
+    <li><img src="/assets/authors/{{ post.author | slugify }}.jpg" alt="{{ post.author }}"></li>
+    <li>Written by {{ post.author | author_links }}</li>
+    <li>Posted {{ post.date | date: "%b %-d, %Y" }}</li>
+  </ul>
+</aside>

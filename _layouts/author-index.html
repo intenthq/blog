@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<header class="no-image">
+  <h1>Posts by {{page.author}}</h1>
+</header>
+
+<nav>
+  <ul>
+    {% for post in site.posts %}
+    {% if post.author contains page.author %}
+        {% include post-item.html %}
+        {% endif %}
+
+    {% endfor %}
+  </ul>
+</nav>
