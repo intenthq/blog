@@ -1,10 +1,12 @@
 <li>
+  <a href="{{ post.url }}">
   <article style="background-image: url('{{post.thumbnail}}');">
     <div>
       <h1>
-        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        {{ post.title }}
       </h1>
-      <p>{{ post.date | date: "%-d %b, %Y" }}</o>
+      <p>{{ post.date | date: "%-d %b, %Y" }}</p>
     </div>
   </article>
+  </a>
 </li>
