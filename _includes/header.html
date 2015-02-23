@@ -1,14 +1,3 @@
 <header>
-    <h1><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
-    <nav>
-      <ul>
-      {% for page in site.pages %}
-        {% if page.title %}
-          <li>
-            <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-      </ul>
-    </nav>
+    <h1><a href="http://intenthq.com/"><img src="/assets/intenthq-logo.svg" alt="IntentHQ Logo"></a><a href="{{ site.baseurl }}/"><span>Engineering Blog</span></a></h1>
 </header>

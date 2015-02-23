@@ -1,9 +1,22 @@
 ---
 layout: default
 ---
-<article>
-  <h1>{{ page.title }}</h1>
-  <aside>{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</aside>
+{% assign post = page %}
+{% include single.html %}
+<nav>
+  <ul>
+    {% assign page_limit = 6 %}
+    {% for post in site.posts limit: 6 %}
+      {% if post.id == page.id %}
+        {% assign page_limit = 7 %}
+      {% endif %}
+    {% endfor %}
 
-  {{ content }}
-</article>
+    {% for post in site.posts limit: page_limit %}
+      {% unless post.id == page.id %}
+        {% include post-item.html %}
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</nav>
+{% include more-posts.html %}

@@ -1,0 +1,11 @@
+---
+layout: default
+---
+{% include archive-header.html %}
+<nav>
+  <ul>
+    {% for post in site.posts %}
+    {% include post-item.html %}
+    {% endfor %}
+  </ul>
+</nav>

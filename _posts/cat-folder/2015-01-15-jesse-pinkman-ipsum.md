@@ -1,6 +1,9 @@
 ---
 layout: post
+author: dsfds
 title:  "Jesse Pinkman Ipsum"
+image: http://lorempixel.com/1460/600/technics/
+thumbnail: http://lorempixel.com/730/300/technics/
 date:   2015-01-15 20:19:56
 ---
 I took this vo-tech class in high school, woodworking. I took a lot of vo-tech classes, because it was just big jerk-off, but this one time I had this teacher by the name of... Mr... Mr. Pike. I guess he was like a Marine or something before he got old. He was hard hearing. My project for his class was to make this wooden box. You know, like a small, just like a... like a box, you know, to put stuff in. So I wanted to get the thing done as fast as possible.
