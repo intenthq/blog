@@ -20,7 +20,7 @@ body {
         text-decoration: none;
     }
     strong {
-        color: $highlight-color;
+        font-family: $bold-font-family;
     }
     img, iframe {
         max-width: 100%;
@@ -134,36 +134,11 @@ body>footer {
 }
 
 body main {
-
-    #container {
-      width: 100%;
-      display: table;
-    }
-
-    #row  {
-      display: table-row;
-    }
-
-    #cell {
-      padding: 25px 25px;
-      display: table-cell;
-      text-align: center;
-      p {
-        color: $highlight-color;
-        font-weight: bold;
-        text-decoration: none;
-      }
-    }
-
-    #small {
-      font-size: $small-font-size;  
-    }
-
     header { /* featured image */
         div { /* overlay */
             height: 600px;
             background-color: $overlay-color;
-            width: 31.1111rem;
+            width: 100%;
             h1 {
                 padding: 30px;
                 background-color: rgba(61, 80, 97, 0.498039);
@@ -171,8 +146,11 @@ body main {
                 position: absolute;
                 top: 25%;
                 right: 0px;
+                @media screen and (min-width: $break-small) {
+                    width: 31.1111rem;
+                }
                 @media screen and (max-width: $break-small) {
-                    width: 12rem;
+                    width: 14rem;
                 }
             }
         }
@@ -315,6 +293,23 @@ body main {
         a {
             padding-left: 0.5rem;
             padding-right: 0.5rem;
+        }
+    }
+}
+
+.small {
+    font-size: $small-font-size;
+}
+
+.inline-list {
+    li {
+        text-align: center;
+        padding: 0.4rem;
+        @media screen and (min-width: $break-small) {
+            display: table-cell;
+        }
+        @media screen and (max-width: $break-small) {
+            display: block;
         }
     }
 }
