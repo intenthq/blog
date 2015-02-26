@@ -2,14 +2,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>{% if page.title %} {{ page.title }} - {% endif %}{{ site.title }}</title>
-<meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description | strip_newlines }}{% endif %}">
-<meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description | strip_newlines }}{% endif %}">
-<meta property="og:image" content="{% if page.image %}{{ page.image }}{% else %}{{ site.default_image }}{% endif %}">
+{% assign title = site.title %}
+{% if page.title %}
+  {%capture title %}{{ page.title }} - {{ site.title }}{% endcapture %}
+{% endif %}
 
+{%capture description %}{{ site.description | strip_newlines }}{% endcapture %}
+{% if page.excerpt %}
+  {%capture description %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% endcapture %}
+{% endif %}
+
+{%capture url %}{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}{% endcapture %}
+
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="og:title" content="{{title}}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:image" content="{{ site.url }}{{ site.baseurl }}{% if page.image %}{{ page.image }}{% else %}{{ site.default_image }}{% endif %}">
+<meta property="og:locale" content="en_GB" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ url }}">
+
+<link rel="canonical" href="{{ url }}">
 <link rel="icon" type="image/png" href="{{ site.url | append: site.baseurl }}/assets/favicon-128-128.png" />
 <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
-<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" />
 
 <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
