@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  What is good code? A scientific definition.
-date:   2015-02-01 17:20:56
+date:   2015-03-11 11:10:00
 excerpt: How would you define good code? This article gives a pseudo-scientific answer to that question after asking a sample of 65 developers that same question.
-image: /assets/quality.jpg
-thumbnail: /assets/quality-thumbnail.jpg
+image: /assets/images/quality.jpg
+thumbnail: /assets/images/quality-thumbnail.jpg
 categories: engineering
 author: Albert Pastrana
 ---
@@ -14,10 +14,10 @@ It's because of the importance of writing good code that we always ask the candi
 
 After lots of interviews we started wondering if we could come out with a definition of good code following a pseudo-scientific method. After all, we had the answers of dozens of software developers and they can't all be wrong, can they?
 
-![Good code measure is wtf/minute by osnews](/assets/good-code-wtf.jpg)
+![Good code measure is wtf/minute by osnews](/assets/images/good-code-wtf.jpg)
 
 ## Methodology
-The population is defined by all the software developers. The sample consists of 65 developers chosen by convenience (applying and having an interview for one of our positions). That means that the sample is biased to developers with some Java experience and, in general, +5 years of experience.
+The population is defined by all the software developers. The sample consists of 65 developers chosen by convenience (applying and having an interview for one of our positions). That means that the sample is biased to developers with some Java or Scala skills and, in general, +5 years of experience.
 
 The questionnaire consists in a single question: _"What do you feel makes code good? How would you define good code?"_ The question has been asked by the same person in a job interview (face to face or via phone) in a period of approximately 1 year, from January 2014 to January 2015.
 
@@ -56,7 +56,7 @@ Curiously, following in the list we find two are about the same topic, documenta
 
 Some other answers include _Clean_ --with clear references in some cases to the well known book "Clean Code" by [Uncle Bob](http://en.wikipedia.org/wiki/Robert_Cecil_Martin)--; _Extendable/Reusable_, e.g. "doesn't constraint you for extension"; the need to not repeat ourselves ([_DRY_](http://en.wikipedia.org/wiki/Don%27t_repeat_yourself)); choose proper _Naming_; write code _Decoupled_ or the importance to write _Small methods_ --although small is a different concept that goes from "10-15 lines" to "<50" depending on the developer--.
 
-![Characteristics of good code](/assets/good-code-characteristics.png)
+![Characteristics of good code](/assets/images/good-code-characteristics.png)
 
 ## Discussion
 
