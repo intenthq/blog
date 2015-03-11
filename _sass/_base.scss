@@ -204,7 +204,7 @@ body main {
             font-style: italic;
         }
     }
-    aside { /* author and so */
+    aside { /* author and sharing */
         max-width: 160px;
         font-size: $base-font-size * 0.8;
         padding: 1rem 0 1rem 0;
@@ -212,15 +212,6 @@ body main {
         border-bottom: 1px solid lighten($text-color, 30);
         ul {
             list-style-type: none;
-            img {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-            }
-        }
-        div.gd-public-share-facebook {
-            padding: 0;
-            margin-bottom: 7px;
         }
         @media screen and (min-width: $break-small) {
             margin-top: 5rem;
@@ -231,6 +222,22 @@ body main {
             width: 100%;
             display: block;
             margin: 0 auto;
+        }
+    }
+    aside.author {
+        img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+    }
+    aside.sharing {
+        &>* {
+          display: block;
+        }
+        div.gd-public-share-facebook {
+            padding: 0;
+            margin-bottom: 7px;
         }
     }
     nav ul { /* list of articles */
