@@ -84,7 +84,7 @@ Here at Intent we were slightly surprised by four items specifically (sorted by 
 
 * _Maintainable_: given that most of us have had to maintain somebody else's code (or our own after some time) and have probably thought about them in non-friendly terms, we were expecting more developers to be worried about writing maintainable code. Maybe it's because some of them assumed that if the code is readable it's maintainable as well.
 
-* _Works_: writing code should always have one purpose, deliver some value to somebody. Writing code that works, that it's actually deployed somewhere making somebody happy is one of our top priorities. So we were kind of surprised every time a developer didn't include that item in the answer. To be fair, it's also true that some of the developers had given that for granted (or at least that's what they said when asked) but it can be synXXX.
+* _Works_: writing code should always have one purpose, deliver some value to somebody. Writing code that works, that it's actually deployed somewhere making somebody happy is one of our top priorities. So we were kind of surprised every time a developer didn't include that item in the answer. To be fair, it's also true that some of the developers had given that for granted (or at least that's what they said when asked) but it can be symptom of some underlying problem.
 
 * _Testable/Tested_: we won't emphasise in here the importance of testing our code, we believe it's well covered in hundreds of other posts and books. That's precisely why we had thought that nowadays more developers would have highlighted the importance of having tests behind our code.
 
