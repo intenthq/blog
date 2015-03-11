@@ -14,7 +14,7 @@ It's because of the importance of writing good code that we always ask the candi
 
 After lots of interviews we started wondering if we could come out with a definition of good code following a pseudo-scientific method. After all, we had the answers of dozens of software developers and they can't all be wrong, can they?
 
-![Good code measure is wtf/minute by osnews](/assets/images/good-code-wtf.jpg)
+[![Good code measure is wtf/minute by osnews](/assets/images/good-code-wtf.jpg)](http://mobile.osnews.com/story.php/19266/WTFs_m)
 
 ## Methodology
 The population is defined by all the software developers. The sample consists of 65 developers chosen by convenience (applying and having an interview for one of our positions). That means that the sample is biased to developers with some Java or Scala skills and, in general, +5 years of experience.
@@ -98,4 +98,6 @@ Finally, we would like to create a definition of good code. In order to do it fi
 
 Doesn't sound bad at all, does it?
 
-![How to write good code by xkcd](http://imgs.xkcd.com/comics/good_code.png)
+[![How to write good code by xkcd](http://imgs.xkcd.com/comics/good_code.png)](http://xkcd.com/844/)[^2]
+
+[^2]: Cartoon by [xkcd](http://xkcd.com/)
