@@ -8,7 +8,7 @@ thumbnail: /assets/images/quality-thumbnail.jpg
 categories: engineering
 author: Albert Pastrana
 ---
-Here at Intent HQ we believe how important it is to write good code. Why? First, because writing good code is much funnier and cheaper than writing bad code. Second, because if you write good code chances are that the product you are building will be much better. Third, and more important, because writing good code is what we are supposed to do: after all, we are getting paid for doing our job *well*.
+Here at Intent HQ we believe how important it is to write good code. Why? First, because writing good code is much cheaper and more fun than writing bad code. Second, because if you write good code chances are that the product you are building will be much better. Third, and more important, because writing good code is what we are supposed to do: after all, we are getting paid for doing our job *well*.
 
 It's because of the importance of writing good code that we always ask the candidates what do they believe good code is. Note that the question asks for a subjective answer, and that's what what we are expecting, the actual thoughts of the candidate about what would he or she expect a code to have (or not have) in order to be considered good.
 
