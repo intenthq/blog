@@ -2,14 +2,14 @@
 layout: post
 title: Distributed ID generation with Redis and Lua
 date: 2015-03-13 19:32:00
-excerpt: 'Introducing Icicle: a distributed, k-ordered unique ID generation system using Redis and Lua.'
+excerpt: 'Introducing Icicle: a distributed, k-sortable unique ID generation system using Redis and Lua.'
 image: /assets/images/id-generation.jpg
 thumbnail: /assets/images/id-generation-thumbnail.jpg
 categories: engineering
 author: Nathan Kleyn
 ---
 
-**TL;DR: We are open-sourcing our distributed _k_-ordered ID generation project called "Icicle", which generates IDs using Lua scripting within distributed Redis hosts. You can [find more information in the GitHub repository](https://github.com/intenthq/icicle)!**
+**TL;DR: We are open-sourcing our distributed _k_-sortable ID generation project called "Icicle", which generates IDs using Lua scripting within distributed Redis hosts. You can [find more information in the GitHub repository](https://github.com/intenthq/icicle)!**
 
 At Intent HQ, we generate a lot of data. Part of the task of capturing this data is to package it up into a common format and store it in a way it can be retrieved. Commonly, labelling this data in a way that facilitates retrieval is a task handled by your database. However, in a big data environment, we need a way to label these pieces of data with an ID in a distributed and scalable way independent of a database.
 
@@ -55,11 +55,11 @@ Using time for ordering would be convenient because we don't need to coordinate 
 
 Chances are, in most applications you actually care more about uniqueness than ordering. What if we were to relax our requirements for ordering so that we could use time as a backing for our ID in a way that could be distributed?
 
-This is where _k_-ordering comes in. The term "_k_-sorted" can be applied to anything which is "loosely ordered". That is, if I gave you the following numbers:
+This is where _k_-sorted comes in. The term "_k_-sorted" can be applied to anything which is "loosely sorted". That is, if I gave you the following numbers:
 
 > 1, 5, 100, 102, 2, 101
 
-A _k_-ordered copy of these numbers might look something like this:
+A _k_-sorted copy of these numbers might look something like this:
 
 > 1, 5, 2, 100, 102, 101
 
