@@ -35,9 +35,9 @@ As a turns out, primarily, the reasons for doing this are deeply rooted in our i
 
 ## Time is hard
 
-Keeping time is actually a really hard problem to solve. At the core of the issue is the fact that computers suffer from "clock drift", where the clock is constantly skewing forwards or backwards away from the actual time. Perhaps even worse, [every computer skews at a different rate](https://en.wikipedia.org/wiki/Clock_skew).
+[Keeping time is actually a really hard problem to solve](http://queue.acm.org/detail.cfm?id=2745385). At the core of the issue is the fact that computers suffer from "clock drift", where the clock is constantly skewing forwards or backwards away from the actual time. Perhaps even worse, [every computer skews at a different rate](https://en.wikipedia.org/wiki/Clock_skew).
 
-Thus, the concept of a "time oracle" is born. Time oracles dedicated servers normally equipped with an atomic clock or GPS device whose sole purpose is for keeping time in as precise a manner as possible. Time oracle servers are used frequently in environments where super accurate time is important (such as trading platforms and financial applications), but they are prohibitively expensive and not a viable solution for those unable to manage their own physical server.
+Thus, the concept of a "time oracle" is born. Time oracles dedicated servers normally equipped with an atomic clock or GPS device whose sole purpose is for keeping time in as precise a manner as possible. Time oracle servers are used frequently in environments where super accurate time is important (such as trading platforms and financial applications), but they are prohibitively expensive and not a viable solution for those working in an environment where deploying custom hardware is impossible (think cloud environments).
 
 NTP was specifically written to ameliorate this problem for those who cannot access a dedicated time oracle. The idea is basically that large organisations donate access to their time oracle servers by adding them to a global pool of NTP servers which can use to adjust their clock against. This is, unfortunately, not without its problems. Its an error prone process, as it involves network hops and jitter, and is thus susceptible to all kinds of inaccuracies that the underlying algorithms do their best to abate but cannot avoid.
 
@@ -75,7 +75,7 @@ Where:
 
 * D is the sequence, 12 bits in total.
 
-We have represented the time as a 41-bit integer by creating a custom epoch: this simply involves picking an arbitrary point in time, calling it "0", and starting to count the milliseconds from there.
+We have represented the time as a 41-bit integer by creating a custom epoch: this simply involves picking an arbitrary point in time, calling it "0", and starting to count the milliseconds from there. As we're representing the time as a 41-bit number, we can generate IDs for ~69 years.
 
 We have decided to generate IDs using Redis, but Redis is not distributed by default, so we "assign" each node an ID, called the "logical shard ID". This is simply a number between 0 and 1023 to distinguish one node from another. This ensures that if two nodes are asked for an ID during the same millisecond, they'll return different IDs.
 
