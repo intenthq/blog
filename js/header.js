@@ -1,7 +1,11 @@
-document.addEventListener('scroll', function (event) {
-    if (document.body.scrollTop > 240) {
-      document.querySelector("body>header").style.background = '#3d5061';
-    } else {
-      document.querySelector("body>header").style.background = '';
+bean.on(document, 'scroll', function(e) {
+    var header = document.querySelector("body>header");
+
+    if (window.scrollY > 240) {
+      if (header.style.background == '') {
+        header.style.background = '#3d5061';
+      }
+    } else if (header.style.background != '') {
+      header.style.background = '';
     }
 });
