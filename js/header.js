@@ -9,3 +9,7 @@ bean.on(document, 'scroll', function(e) {
       header.style.background = '';
     }
 });
+
+window.onhashchange = function(e) {
+  window.scrollBy(0, -76);
+};
