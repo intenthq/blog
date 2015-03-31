@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Distributed ID generation with Redis and Lua
-date: 2015-03-13 19:32:00
+date: 2015-03-31 15:00:00
 excerpt: 'Introducing Icicle: a distributed, k-sortable unique ID generation system using Redis and Lua.'
 image: /assets/images/id-generation.jpg
 thumbnail: /assets/images/id-generation-thumbnail.jpg
@@ -121,9 +121,7 @@ One final interesting aspect of Redis is that it does not actually support any f
 
 ## Open-source goodness
 
-> FIXME: Actual URL to Lua script needs to be added when repository is pushed.
-
-Now you know the theory and limitations behind generating distributed IDs, [we've open-sourced our implementation of these ideas on GitHub as "Icicle"](https://github.com/intenthq/icicle). The reference implementation is in Java, but really you could reimplement this easily in any language (remember, the primary part of it is [the Lua script that gets passed to Redis](FIXME), which is already implemented for you!)
+Now you know the theory and limitations behind generating distributed IDs, [we've open-sourced our implementation of these ideas on GitHub as "Icicle"](https://github.com/intenthq/icicle). The reference implementation is in Java, but really you could reimplement this easily in any language (remember, the primary part of it is [the Lua script that gets passed to Redis](https://github.com/intenthq/icicle/blob/master/icicle-core/src/main/resources/id-generation.lua), which is already implemented for you!)
 
 Contributions to the source-code are welcome via GitHub pull requests!
 
