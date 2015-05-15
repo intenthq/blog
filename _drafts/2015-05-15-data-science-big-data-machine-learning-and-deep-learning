@@ -38,7 +38,7 @@ Now, how do we aggregate this data and create a model? Well, that’s the data s
 
 I recently spent sometime writing a book all about data science, outlining the essential parts of this complex subject. It’s very practical, so the reader will have a complete hands-on experience of the essence of data science. 
 
-It’s organised in 6 chapters … the 6the key points of data science:
+It’s organised in 6 chapters … the 6th key points of data science:
 1. First steps: how to set up your computer
 2. Data munging: how to download and handle data
 3. The data science pipeline: how to prepare your dataset for modelling
