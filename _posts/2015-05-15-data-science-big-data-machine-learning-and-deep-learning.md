@@ -3,8 +3,8 @@ layout: post
 title:  Data science, big data, machine learning and deep learning
 date:   2015-05-15 11:31:00
 excerpt: Buzzwords or true reality? Are scientists really able to predict what you have underneath your bedside table?
-image: /assets/images/lda-title.jpg
-thumbnail: /assets/images/lda-thumbnail.jpg
+image: /assets/images/data-science-big-data-machine-learning-and-deep-learning-title.jpg
+thumbnail: /assets/images/data-science-big-data-machine-learning-and-deep-learning-thumbnail.jpg
 categories: r&d
 author: Alberto Boschetti
 ---
@@ -39,13 +39,13 @@ So, the bits of information I’d use are:
 Now, how do we aggregate this data and create a model? Well, that’s the data science secret sauce! It’s not an easy answer, and furthermore the solution is not unique (a combination of stats and math; a mixed blessing).
 
 
-I recently spent sometime writing a book all about data science, outlining the essential parts of this complex subject. It’s very practical, so the reader will have a complete hands-on experience of the essence of data science. 
+I recently spent some time writing a book all about data science, outlining the essential parts of this complex subject. It’s very practical, so the reader will have a complete hands-on experience of the essence of data science. 
 
 
 > [<img src="/assets/images/data-science-big-data-machine-learning-and-deep-learning_book_img.png" height="300">](http://www.amazon.co.uk/Python-Science-Essentials-Alberto-Boschetti/dp/1785280422)
 
 
-It’s organised in 6 chapters … the 6th key points of data science:  
+It’s organised in 6 chapters … the key points of data science:  
 
 1. *First steps:* how to set up your computer
 2. *Data munging:* how to download and handle data
@@ -53,7 +53,6 @@ It’s organised in 6 chapters … the 6th key points of data science:
 4. *Machine learning:* how to create the model
 5. *Social network analysis:* how to analyse a social network
 6. *Visualisation:* how to visualise the key information of the model
-
 
 
 > **“Ok ok, but what do I actually have underneath my bedside table?”**  
