@@ -127,3 +127,6 @@ DEPENDENCIES
   github-pages (= 35)
   itextomml
   json
+
+BUNDLED WITH
+   1.10.1
