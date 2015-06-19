@@ -9,7 +9,7 @@ categories: engineering
 author: Albert Pastrana
 ---
 
-Here at Intent HQ we use Wikipedia and Wikidata as one of our sources of data. It is very important because bla bla bla.
+Here at Intent HQ we use Wikipedia and Wikidata as one of our sources of data. It is very important because they both encode an enormous amount of information in several languages that we use to build our [Topic Graph](https://www.intenthq.com/the-topic-graph/).
 
 Although the current process we have to process these dumps works well enough, we are always interested in finding new and better ways of doing our work. It's because of that that we were very excited when we saw the Reactive Streams initiative [^1]. We thought it could be used to process the largest encyclopaedia in the world [^2].
 
@@ -25,11 +25,9 @@ The PoC was based on this requierement:
 
 Let's see what we did...
 
-You can think of Akka Streams as a graph, our execution graph for this PoC was simple enough, it can be seen below:
+You can think of Akka Streams as a graph. Our execution graph for this PoC was simple enough, it can be seen below:
 
     dump-file -> parse-json -> extract-site-links -> print-progress
-
-But you can build much more complex processes using Akka Streams, it can be extended using broadcast or bla bla bla. (potser al final?)
 
 ### Creating the data source
 
@@ -40,7 +38,7 @@ If we want to create a stream, the first thing we will need is a Source[^5]:
 
 In our case, this is the json wikidata dump[^6] which comes in a single gzip compressed file as a (huge) JSON array. Luckyly for us, each object is on a separate line in the file, so it can be easily read line by line and and processed independently.
 
-This is an extract on how the dump looks like:
+This is an extract showing what the dump looks like:
 {% highlight json %}
 [
 {"id":"Q1","type":"item", "aliases": ... },
@@ -86,7 +84,7 @@ Where `parseItem` is a function that parses a single line of the input file (an 
 
 It's important to note that this function won't be able to generate a `WikidataElement` for all the items in the input (some of them, for example, don't have any sitelink, so we are not interested in them), so the relationship between the output and the transformation is not 1:1.
 
-That can be easily solved by returning an `Option[WikidataElement` and by flattening the result. In Akka streams, there is no `flatMap` but you can use `mapConcat` instead -note that it works only on `immutable.Seq[T]`-.
+That can be easily solved by returning an `Option[WikidataElement` and by flattening the result. In Akka Streams, there is no `flatMap` but you can use `mapConcat` instead (note that it works only on `immutable.Seq[T]`).
 
 {% highlight scala %}
 def parseItem(langs: Seq[String], line: String): Option[WikidataElement] = ???
@@ -107,7 +105,7 @@ In the scenario we are considering for this simple PoC, we don't want to do anyt
 
 > A `Sink` is a set of stream processing steps that has one open input and an attached output. Can be used as a `Subscriber`
 
-There are several ways of creating a `Sink`, for our purpose, we will fold over the stream to accumulate a counter that we will use to log a message every N elements. A possible implementation would be the following one:
+There are several ways of creating a `Sink`. For our purpose, we will fold over the stream to accumulate a counter that we will use to log a message every N elements. A possible implementation would be the following one:
 
 {% highlight scala %}
 def logEveryNSink[T](n: Int) = Sink.fold(0) { (x, y: T) =>
@@ -117,7 +115,7 @@ def logEveryNSink[T](n: Int) = Sink.fold(0) { (x, y: T) =>
 }
 {% endhighlight %}
 
-Putting all together, we have a single liner that creates a source, transforms it by parsing the JSON and logs a message every 10K items:
+Putting all together, we have a one-liner that creates a source, transforms it by parsing the JSON and logs a message every 10K items:
 
 {% highlight scala %}
 source(config.input).via(parseJson(config.languages)).to(logEveryNSink(10000)).run()
@@ -125,13 +123,13 @@ source(config.input).via(parseJson(config.languages)).to(logEveryNSink(10000)).r
 
 You must be thinking now: "that's ok, but I can't see why you need that *** framework to parse and process a file".
 
-Well, you are right. We could try to argue that Akka streams is this or that. But let's be honest, we haven't done anything (yet) that will change our lifes. We will take this simple example and will add some cool stuff, it may not change your lifes but it may make them easier at some point.
+Well, you are right. We could try to argue that Akka Streams is this or that. But let's be honest, we haven't done anything (yet) that will change our lives. We will take this simple example and will add some cool stuff: it may not change your lives but it may make them easier at some point.
 
 [![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/d0e32be48427962d5d8f19c7b3db0d43c868ba73)
 
 ### Paralellise all the things!
 
-Yep, we know, your CPU has N cores and you like all of them to be as busy as possible. Given that the process can be easilly parallelised, we only need to find how Akka streams allow us do it. There are a couple of methods in the `Flow` class that can help us:
+Yep, we know, your CPU has N cores and you like all of them to be as busy as possible. Given that the process can be easilly parallelised, we only need to find how Akka Streams allow us do it. There are a couple of methods in the `Flow` class that can help us:
 
 {% highlight scala %}
   /**
@@ -178,7 +176,7 @@ def parseJson(langs: Seq[String])(implicit ec: ExecutionContext): Flow[String, W
 
 Imagine now that besides logging every N items, we want another process to take each WikidataElement and tell us if the title (site link) is the same in all the specified languages. After that, we want to aggregate the results and output just the percentages.
 
-One easy way of doing this is to create a `Sink` that does the processing and feeds both this new sink and the previous one (logging) with the stream of wikidata elements. Akka streams provides us with some very handy DSL to do it.
+One easy way of doing this is to create a `Sink` that does the processing and feeds both this new sink and the previous one (logging) with the stream of wikidata elements. Akka Streams provides us with some very handy DSL to do it.
 
     dump-file -> parse-json -> extract-site-links -> print-progress
                                                   -> check-same-titles -> count
@@ -203,7 +201,7 @@ def count: Sink[Boolean, Future[(Int, Int)]] = Sink.fold((0,0)) {
 
 #### Putting it all together
 
-Now, in order to do be able to have two flows processing the same stream, we will need to use what Akka streams calls Graphs[^9]:
+Now, in order to do be able to have two flows processing the same stream, we will need to use what Akka Streams calls Graphs[^9]:
 
 > Graphs are needed whenever you want to perform any kind of fan-in ("multiple inputs") or fan-out ("multiple outputs") operations. Considering linear Flows to be like roads, we can picture graph operations as junctions: multiple flows being connected at a single point.
 
@@ -226,7 +224,7 @@ val graph = FlowGraph.closed(count) { implicit b =>
 [![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/9d0a00564b95abbf31580d0c28b7ac89b8fd16b9)
 
 #### Results
-We executed some tests comparing English, German and Catalan Wikipedia links (aka sitelinks). The execution took in between 362 and 410 seconds in a MacBook Pro 2.3 GHz Intel Core i7 (don't take that as a benchmark, we didn't). The results, in case you are interested are the following: 44.87% of the entries in the English Wikipedia share the same title with the German one while this figure is only 35.05% when we compare it with the Catalan Wikipedia.
+We executed some tests comparing English, German and Catalan Wikipedia links (aka sitelinks). The execution took in between 362 and 410 seconds on a MacBook Pro 2.3 GHz Intel Core i7 (don't take that as a benchmark, we didn't). The results, in case you are interested are the following: 44.87% of the entries in the English Wikipedia share the same title with the German one while this figure is only 35.05% when we compare it with the Catalan Wikipedia.
 
 Complete output below:
 
@@ -247,7 +245,7 @@ Complete output below:
 
 ### Conclusion
 
-First of all, we had some good fun playing with Akka streams, it's a fairly easy to use framework, well documented enough and with a mild learning curve. We will for sure consider using it in the future!
+First of all, we had some good fun playing with Akka Streams. It's a fairly easy to use framework, well documented enough and with a mild learning curve. We will for sure consider using it in the future!
 
 Now, it's your turn, try it for yourself -you can find a repo with the code of the PoC in our <a href="https://github.com/intenthq/wikidata-akka-streams/" target="_blank">github</a>- and let us know your thoughts.
 
@@ -255,8 +253,8 @@ Now, it's your turn, try it for yourself -you can find a repo with the code of t
 [^2]: <a href="http://en.wikipedia.org/wiki/Wikipedia:Size_comparisons" target="_blank">Wikipedia: Size comparisons</a>
 [^3]: <a href="http://en.wikipedia.org/wiki/Wikipedia:Size_of_Wikipedia" target="_blank">Wikipedia: Size of Wikipedia</a>
 [^4]: <a href="https://news.ycombinator.com/item?id=9581862" target="_blank">Hacker news discussion: Your data fits in RAM</a>
-[^5]: <a href="https://github.com/akka/akka/blob/release-2.3-dev/akka-stream/src/main/scala/akka/stream/scaladsl/Source.scala#L38" target="_blank">Akka streams: Source.scala</a>
+[^5]: <a href="https://github.com/akka/akka/blob/release-2.3-dev/akka-stream/src/main/scala/akka/stream/scaladsl/Source.scala#L38" target="_blank">Akka Streams: Source.scala</a>
 [^6]: <a href="https://www.wikidata.org/wiki/Wikidata:Database_download#JSON_dumps_.28recommended.29" target="_blank">Wikidata: Database download. JSON dumps</a>
-[^7]: <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC3/scala/stream-flows-and-basics.html" target="_blank">Akka streams: Basics and working with Flows</a>
+[^7]: <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC3/scala/stream-flows-and-basics.html" target="_blank">Akka Streams: Basics and working with Flows</a>
 [^8]: <a href="https://github.com/akka/akka/blob/release-2.3-dev/akka-stream/src/main/scala/akka/stream/scaladsl/Sink.scala#L24" target="_blank">Akka streams: Sink.scala</a>
-[^9]: <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC3/scala/stream-graphs.html" target="_blank">Akka streams: Working with Graphs</a>
+[^9]: <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC3/scala/stream-graphs.html" target="_blank">Akka Streams: Working with Graphs</a>
