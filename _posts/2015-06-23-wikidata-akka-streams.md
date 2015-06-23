@@ -125,7 +125,7 @@ You must be thinking now: "that's ok, but I can't see why you need that *** fram
 
 Well, you are right. We could try to argue that Akka Streams is this or that. But let's be honest, we haven't done anything (yet) that will change our lives. We will take this simple example and will add some cool stuff: it may not change your lives but it may make them easier at some point.
 
-[![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/d0e32be48427962d5d8f19c7b3db0d43c868ba73)
+[![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/d0e32be48427962d5d8f19c7b3db0d43c868ba73) _View the commit on github_
 
 ### Paralellise all the things!
 
@@ -170,7 +170,7 @@ def parseJson(langs: Seq[String])(implicit ec: ExecutionContext): Flow[String, W
 }
 {% endhighlight %}
 
-[![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/dce57805d745e009aa2283aaf1437ad4aa6dbbc3)
+[![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/dce57805d745e009aa2283aaf1437ad4aa6dbbc3) _View the commit on github_
 
 ### Doing more stuff at the same time
 
@@ -221,7 +221,7 @@ val graph = FlowGraph.closed(count) { implicit b =>
 }
 {% endhighlight %}
 
-[![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/9d0a00564b95abbf31580d0c28b7ac89b8fd16b9)
+[![commit in github](/assets/images/commit.png)](https://github.com/intenthq/wikidata-akka-streams/commit/9d0a00564b95abbf31580d0c28b7ac89b8fd16b9) _View the commit on github_
 
 #### Results
 We executed some tests comparing English, German and Catalan Wikipedia links (aka sitelinks). The execution took in between 362 and 410 seconds on a MacBook Pro 2.3 GHz Intel Core i7 (don't take that as a benchmark, we didn't). The results, in case you are interested are the following: 44.87% of the entries in the English Wikipedia share the same title with the German one while this figure is only 35.05% when we compare it with the Catalan Wikipedia.
