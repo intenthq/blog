@@ -9,7 +9,7 @@ categories: engineering
 author: Albert Pastrana
 ---
 
-Here at Intent HQ we use Wikipedia and Wikidata as one of our sources of data. It is very important because they both encode an enormous amount of information in several languages that we use to build our [Topic Graph](https://www.intenthq.com/the-topic-graph/).
+Here at Intent HQ we use Wikipedia and Wikidata as sources of data. They are very important to us because they both encode an enormous amount of information in several languages that we use to build our [Topic Graph](https://www.intenthq.com/the-topic-graph/).
 
 Although the current process we have to process these dumps works well enough, we are always interested in finding new and better ways of doing our work. It's because of that that we were very excited when we saw the Reactive Streams initiative [^1]. We thought it could be used to process the largest encyclopaedia in the world [^2].
 
