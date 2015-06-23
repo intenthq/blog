@@ -11,17 +11,17 @@ author: Albert Pastrana
 
 Here at Intent HQ we use Wikipedia and Wikidata as sources of data. They are very important to us because they both encode an enormous amount of information in several languages that we use to build our [Topic Graph](https://www.intenthq.com/the-topic-graph/).
 
-Although the current process we have to process these dumps works well enough, we are always interested in finding new and better ways of doing our work. It's because of that that we were very excited when we saw the Reactive Streams initiative [^1]. We thought it could be used to process the largest encyclopaedia in the world [^2].
+Although the current process we have to process these dumps works well enough, we are always interested in finding new and better ways of doing our work. It's because of that that we were very excited when we saw the Reactive Streams initiative [^1]. We thought it could be used to process the largest encyclopædia in the world [^2].
 
-One may think about using some of the (alert, buzzword landing) Big Data tools everybody is using nowadays. Wikidata and Wikipedia are huge -the english version of Wikipedia, for example, has over 4.8 million articles[^3] and the uncompressed dump is a single xml file of about 50 GB- and it is also challenging enough to work with. But we can't call it Big Data -actually, the whole dataset fits "easily" in memory[^4]-.
+One may think about using some of the (alert, buzzword landing) Big Data tools everybody is using nowadays. Wikidata and Wikipedia are huge (the english version of Wikipedia, for example, has over 4.8 million articles[^3] and the uncompressed dump is a single xml file of about 50 GB) and it is also challenging enough to work with. But we can't call it Big Data - actually, the whole dataset fits "easily" in memory[^4].
 
 ## The proof of concept
 
 So, here we are, trying to solve an old problem with a (fairly) new technology. The main goal of the proof of concept was to evaluate if it was possible to process the whole Wikidata dump with constant memory usage and making the most of our computer (by using all of our CPU cores, for example).
 
-The PoC was based on this requierement:
+The PoC was based on this requirement:
 
-> In order to obtain the wikidata id for an item given its title and a specific language, we should generate an index containing (title, lang) => canonical-id
+> In order to obtain the Wikidata ID for an item given its title and a specific language, we should generate an index containing (title, lang) => canonical-id
 
 Let's see what we did...
 
@@ -36,7 +36,7 @@ If we want to create a stream, the first thing we will need is a Source[^5]:
  > A `Source` is a set of stream processing steps that has one open output. It can comprise any number of internal sources and transformations that are wired together, or it can be an “atomic” source, e.g. from a collection or a file. Materialization turns a Source into a Reactive Streams `Publisher` (at least conceptually).
 
 
-In our case, this is the json wikidata dump[^6] which comes in a single gzip compressed file as a (huge) JSON array. Luckyly for us, each object is on a separate line in the file, so it can be easily read line by line and and processed independently.
+In our case, this is the JSON Wikidata dump[^6] which comes in a single gzip compressed file as a (huge) JSON array. Luckily for us, each object is on a separate line in the file, so it can be easily read line by line and and processed independently.
 
 This is an extract showing what the dump looks like:
 {% highlight json %}
@@ -49,7 +49,7 @@ This is an extract showing what the dump looks like:
 ]
 {% endhighlight %}
 
-The function that creates the source will neeed to make use of the Java io classes and would look something like this:
+The function that creates the source will need to make use of the Java io classes and would look something like this:
 {% highlight scala %}
 def source(file: File): Source[String, Unit] = {
   val compressed = new GZIPInputStream(new FileInputStream(file), 65536)
@@ -80,11 +80,11 @@ def parseJson(langs: Seq[String]): Flow[String, WikidataElement, Unit] =
   Flow[String].map(line => parseItem(langs, line))
 {% endhighlight %}
 
-Where `parseItem` is a function that parses a single line of the input file (an item element in the wikidata JSON) and returns a `WikidataElement` filled with the titles for all the languages passed as a parameter.
+Where `parseItem` is a function that parses a single line of the input file (an item element in the Wikidata JSON) and returns a `WikidataElement` filled with the titles for all the languages passed as a parameter.
 
 It's important to note that this function won't be able to generate a `WikidataElement` for all the items in the input (some of them, for example, don't have any sitelink, so we are not interested in them), so the relationship between the output and the transformation is not 1:1.
 
-That can be easily solved by returning an `Option[WikidataElement` and by flattening the result. In Akka Streams, there is no `flatMap` but you can use `mapConcat` instead (note that it works only on `immutable.Seq[T]`).
+That can be easily solved by returning an `Option[WikidataElement]` and by flattening the result. In Akka Streams, there is no `flatMap` but you can use `mapConcat` instead (note that it works only on `immutable.Seq[T]`).
 
 {% highlight scala %}
 def parseItem(langs: Seq[String], line: String): Option[WikidataElement] = ???
@@ -142,7 +142,7 @@ Yep, we know, your CPU has N cores and you like all of them to be as busy as pos
   /**
    * Transform this stream by applying the given function to each of
    * the elements as they pass through this processing step.
-   * (...) each processed element will be emitted dowstream as soon as it
+   * (...) each processed element will be emitted downstream as soon as it
    * is ready, i.e. it is possible that the elements are not emitted
    * downstream in the same order as received from upstream.
    */
@@ -176,7 +176,7 @@ def parseJson(langs: Seq[String])(implicit ec: ExecutionContext): Flow[String, W
 
 Imagine now that besides logging every N items, we want another process to take each WikidataElement and tell us if the title (site link) is the same in all the specified languages. After that, we want to aggregate the results and output just the percentages.
 
-One easy way of doing this is to create a `Sink` that does the processing and feeds both this new sink and the previous one (logging) with the stream of wikidata elements. Akka Streams provides us with some very handy DSL to do it.
+One easy way of doing this is to create a `Sink` that does the processing and feeds both this new sink and the previous one (logging) with the stream of Wikidata elements. Akka Streams provides us with some very handy DSL to do it.
 
     dump-file -> parse-json -> extract-site-links -> print-progress
                                                   -> check-same-titles -> count
