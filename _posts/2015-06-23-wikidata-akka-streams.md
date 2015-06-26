@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Process the whole Wikidata in 7 minutes with your laptop (and Akka streams)
+title: Process the whole Wikidata in 7 minutes with your laptop (and Akka Streams)
 date: 2015-06-23 11:20:32
 excerpt: How Akka Streams can be used to process the Wikidata dump in parallel and using constant memory with just your laptop.
 image: /assets/images/wikidata-akka-streams.jpg
@@ -84,7 +84,7 @@ Where `parseItem` is a function that parses a single line of the input file (an 
 
 It's important to note that this function won't be able to generate a `WikidataElement` for all the items in the input (some of them, for example, don't have any sitelink, so we are not interested in them), so the relationship between the output and the transformation is not 1:1.
 
-That can be easily solved by returning an `Option[WikidataElement]` and by flattening the result. In Akka Streams, there is no `flatMap` but you can use `mapConcat` instead (note that it works only on `immutable.Seq[T]`).
+That can be easily solved by returning an `Option[WikidataElement]` and by flattening the result. In Akka Streams, there is no `flatMap` but you can use `mapConcat` instead (note that it works only on `immutable.Seq[T]`) [^immutable-rc4].
 
 {% highlight scala %}
 def parseItem(langs: Seq[String], line: String): Option[WikidataElement] = ???
@@ -249,6 +249,16 @@ First of all, we had some good fun playing with Akka Streams. It's a fairly easy
 
 Now, it's your turn, try it for yourself -you can find a repo with the code of the PoC in our <a href="https://github.com/intenthq/wikidata-akka-streams/" target="_blank">github</a>- and let us know your thoughts.
 
+### Edit (25/6/2015)
+
+After some feedback from all of you (thanks!), we have updated the code to use Akka Streams RC4 (the original PoC was done using RC3).
+
+Also as _drewhk_ commented in the <a href="https://groups.google.com/d/msg/akka-user/0sHgu-dwS4s/ky4OSzaLQhAJ" target="_blank">akka user list</a>: "there are other ways to exploit paralellisation other than mapAsyncUnordered". Take a look at the <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC3/scala/stream-parallelism.html" target="_blank">documentation for more information.
+
+[![An Icon For A Commit](/assets/images/commit.png) _View the commit for this section on GitHub_](https://github.com/intenthq/wikidata-akka-streams/commit/be7966fb79c0a1d6997f957e7fc0831a4b65ccc3)
+
+### References
+
 [^1]: <a href="http://www.reactive-streams.org/" target="_blank">Reactive Streams</a>
 [^2]: <a href="http://en.wikipedia.org/wiki/Wikipedia:Size_comparisons" target="_blank">Wikipedia: Size comparisons</a>
 [^3]: <a href="http://en.wikipedia.org/wiki/Wikipedia:Size_of_Wikipedia" target="_blank">Wikipedia: Size of Wikipedia</a>
@@ -258,3 +268,4 @@ Now, it's your turn, try it for yourself -you can find a repo with the code of t
 [^7]: <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC3/scala/stream-flows-and-basics.html" target="_blank">Akka Streams: Basics and working with Flows</a>
 [^8]: <a href="https://github.com/akka/akka/blob/release-2.3-dev/akka-stream/src/main/scala/akka/stream/scaladsl/Sink.scala#L24" target="_blank">Akka streams: Sink.scala</a>
 [^9]: <a href="http://doc.akka.io/docs/akka-stream-and-http-experimental/1.0-RC3/scala/stream-graphs.html" target="_blank">Akka Streams: Working with Graphs</a>
+[^immutable-rc4]: "This is no longer true after RC4, since you will be able to emit an immutable.Iterable." <a href="https://groups.google.com/d/msg/akka-user/0sHgu-dwS4s/RBxVKt2InVQJ" target="_blank">akka user list</a>
