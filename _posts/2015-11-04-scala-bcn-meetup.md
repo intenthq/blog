@@ -9,7 +9,7 @@ categories: engineering
 author: Albert Pastrana
 ---
 
-On Thursday the 29th of October we had the pleasure to be speakers in the [Scala Barcelona meetup](http://www.meetup.com/Scala-Developers-Barcelona/). The group is very active and tries to schedule an event every two weeks to talk, discuss and enjoy coding some Scala.
+On Thursday 29th October we had the pleasure to be speakers in the [Scala Barcelona meetup](http://www.meetup.com/Scala-Developers-Barcelona/). The group is very active and tries to schedule an event every two weeks to talk, discuss and enjoy coding some Scala.
 
 Being one of the few companies in Barcelona that use Scala in production, we were asked to do a presentation about how are we using it internally. Last June we spoke about Akka Streams and published a blog post about how to [use Akka Streams to process larges amounts of data](/2015/06/wikidata-akka-streams/). This time we wanted to give a high level overview of how we are using Scala to do things like Natural Language Processing.
 
