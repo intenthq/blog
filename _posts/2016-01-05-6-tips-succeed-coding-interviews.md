@@ -17,7 +17,7 @@ We know that sometimes candidates feel insecure and nervous when they are facing
 
 - You can code in your preferred editor/ide
 
-- You an google anything you want (as if you were working!)
+- You can google anything you want (as if you were working!)
 
 And, most of all, we understand that being watched by three guys while you're coding is not the ideal coding environment, so we adjust our expectations.
 
