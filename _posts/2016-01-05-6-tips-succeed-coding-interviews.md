@@ -64,7 +64,9 @@ We promise we will try not to ask cliched questions[^xkcd]
 
 [![Five years by xkcd](http://imgs.xkcd.com/comics/five_years.png)](http://xkcd.com/1088/)
 
-### References
+### Notes
+_[Image of computer](https://flic.kr/p/wuu2Qn) by [Christiaan Colen](https://www.flickr.com/photos/132889348@N07/) is licensed under [CC BY SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)_
+
 [^stupid-question]: [There is no such thing as a stupid question](https://en.wikipedia.org/wiki/No_such_thing_as_a_stupid_question)
 [^questions]: "Judge a man by his questions rather than by his answers" [ Pierre-Marc-Gaston, duc de Lévis ](https://en.wikiquote.org/wiki/Voltaire#Misattributed)
 [^xkcd]: Cartoon by [xkcd](http://xkcd.com/)
