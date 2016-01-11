@@ -11,13 +11,13 @@ author: Albert Pastrana
 
 Here at Intent HQ we deal with code on a daily basis (is there any software engineering team who doesn't?). So, when we are about to hire somebody, her ability to write code is probably the skill we will take into account the most. That's why we do have a coding interview in our process.
 
-We know that sometimes candidates feel insecure and nervous when they are facing a code interview. We understand those feelings (we've been doing code interviews all our life too) and that's why we try to make you as comfortable as possible by:
+We know that sometimes candidates feel insecure and nervous when they are facing a code interview. We understand those feelings (we've been doing code interviews all our lives too), so we try to make you as comfortable as possible with rules like:
 
 - You can code in your preferred language
 
-- You can code in your preferred editor/ide
+- You can code in your preferred editor/IDE
 
-- You an google anything you want (as if you were working!)
+- You can google anything you want (as if you were working!)
 
 And, most of all, we understand that being watched by three guys while you're coding is not the ideal coding environment, so we adjust our expectations.
 
@@ -26,37 +26,37 @@ In the past years we've seen some average candidates cracking the code interview
 ## Keep calm
 Yep, we know, it's easier said than done. But think a bit about it:
 
-- Coding is what you like and do better. So you've simply been asked to do have some fun and show your strengths.
+- Coding is what you like and do well. So you've simply been asked to do have some fun and show your strengths.
 
 - You have nothing to lose. You don't work here, so you won't lose anything.
 
-- You have lots to win. You will probably learn something suring the interview and, maybe, you can get to work with us :-).
+- You have lots to win. You will probably learn something during the interview and, maybe, you can get to work with us :-).
 
 
 Also, we promise you we are not monsters and won't bite you (well, at least most of us).
 
 ## Don't be shy, ask questions!
-Sometimes you may feel that asking a question will make you look [insert-negative-adjective-here] in front of the interviewers. This is not true[^stupid-question], asking questions will make you look, well, just like somebody who is not afraid to ask questions. Also, asking the right questions can help you a lot to solve the kata and, who knows, maybe it will make you look [insert-positive-adjective-here] in front of your audience[^questions].
+Sometimes you may feel that asking a question will make you look [insert-negative-adjective-here] in front of the interviewers. This is not true[^stupid-question], asking questions will make you look, well, just like somebody who is not afraid to ask questions. Also, asking the right questions can be a great help in solving the kata and, who knows, maybe it will make you look [insert-positive-adjective-here] in front of your audience[^questions].
 
 ## Explain what you are doing
-Sometimes your coding will be self explanatory, but there will be other moments when you will be just thinking about how to approach a problem, or trying to remember what was the name of that method so useful.
+Sometimes your coding will be self explanatory, but there will be other moments when you will just be thinking about how to approach a problem, or trying to remember what the name of that really useful method was.
 
 Try to explain what you are doing and thinking as much as you can. It's really useful for us to understand what's going on in your head and to know why you are doing X and not Y. Not only this, we may be able to help you telling you the name of that method you forgot!
 
 ## Think before you code
-It may seem obvious, but we've seen candidates that looked like they were programming by trial and error: "does 5 work? and 6? maybe is 7?".
+It may seem obvious, but we've seen candidates that looked like they were programming by trial and error: "does 5 work? and 6? maybe it's 7?".
 
 Don't ever do that, not in a tech interview, not while playing with a new language, not when coding production code.
 
-Every change you do should be driven by some reasoning and expectations. "I think this change will fix that test because of X". In case your brain works so fast it may look like you are not reasoning, follow the previous tip and explain what you are doing.
+Every change you do should be driven by some reasoning and expectations. "I think this change will fix that test because of X". In case your brain works so fast that it may look like you are not reasoning, follow the previous tip and explain what you are doing.
 
 ## Show your strengths, do what you know best
-We've already stressed that coding is one of the things you do better, so we are presenting an excellent opportunity to show off.
+We've already stressed that coding is one of the things you do best, so we are presenting an excellent opportunity to show off.
 
 Focus on simplicity and on what you know best. Don't try fancy things you just read yesterday on HN, do what you've been doing solidly in the past years.
 
 ## Listen to your interviewers
-We can't emphasise how important this is. We really want you to our next hire so during the interview we will be trying to help you by giving you hints, tips or advise. Listen to us, it will be in your benefit.
+We can't emphasise how important this is. We really want you to our next hire so during the interview we will be trying to help you by giving you hints, tips or advice. Listen to us, it will be to your benefit.
 
 &nbsp;
 
