@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  6 tips to succeed in our coding interviews
-date:   2016-01-05 10:23:10
+date:   2016-01-19 10:23:10
 excerpt: Some advice on how to proceed when facing a technical interview where you are asked to code like ours.
 image: /assets/images/coding-interview-title.jpg
 thumbnail: /assets/images/coding-interview-thumbnail.jpg
