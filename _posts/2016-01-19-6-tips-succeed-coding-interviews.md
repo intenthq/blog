@@ -56,7 +56,7 @@ We've already stressed that coding is one of the things you do best, so we are p
 Focus on simplicity and on what you know best. Don't try fancy things you just read yesterday on HN, do what you've been doing solidly in the past years.
 
 ## Listen to your interviewers
-We can't emphasise how important this is. We really want you to our next hire so during the interview we will be trying to help you by giving you hints, tips or advice. Listen to us, it will be to your benefit.
+We can't emphasise how important this is. We really want you to be our next hire so during the interview we will be trying to help you by giving you hints, tips or advice. Listen to us, it will be to your benefit.
 
 &nbsp;
 
