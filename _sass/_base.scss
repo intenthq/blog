@@ -12,7 +12,7 @@ body {
     background-color: $white-color;
     -webkit-text-size-adjust: 100%;
     h1, h2, h3, h4, h5, h6 {
-      color: $grey-color;
+      color: $heading-color;
       font-family: $base-font-family;
     }
     h1 {
@@ -54,30 +54,11 @@ body>header {
             width: 160px;
         }
     }
-    ul {
-      list-style: none;
-      list-style-position: outside;
-      display: block;
-      float: right;
-      li {
-        font-weight: 100;
-        display: inline-block;
-        line-height: 76px;
-        padding-left: 18px;
-        padding-right: 18px;
-        text-transform: uppercase;
-        -webkit-transition: background 0.4s ease-in-out;
-        transition: background 0.4s ease-in-out;
-      }
-      li:hover {
-        background-color: #596d7d;
-      }
-    }
 }
 
 body>footer {
     position: relative;
-    background-color: $grey-color;
+    background-color: $heading-color;
     margin-top: 50px;
     padding: 2rem 3rem 1rem 3rem;
     font-size: $base-font-size / 1.2;
@@ -86,7 +67,7 @@ body>footer {
         list-style-type: none;
     }
     * {
-        color: $text-color;
+        color: $light-text-color;
     }
     a {
         &:hover {
@@ -164,18 +145,12 @@ body main {
             width: 100%;
             h1 {
                 padding: 30px;
-                background-color: rgba(61, 80, 97, 0.498039);
+                background-color: $heading-color;
                 color: $white-color;
                 position: absolute;
                 top: 25%;
                 right: 0px;
                 width: 50%;
-                // @media screen and (min-width: $break-small) {
-                //     width: 31.1111rem;
-                // }
-                // @media screen and (max-width: $break-small) {
-                //     width: 14rem;
-                // }
             }
         }
         background-size: cover
@@ -269,6 +244,7 @@ body main {
         }
     }
     aside.author {
+        color: $light-text-color;
         img {
             width: 60px;
             height: 60px;
@@ -288,50 +264,45 @@ body main {
         display: block;
         list-style-type: none;
         font-size: 0;
-        line-height: 0;
         li {
+            position: relative;
             display: inline-block;
+            padding: 0 2%;
             @media screen and (min-width: $break-large) {
-                width: 33.333%;
+                width: 29.333333%;
             }
             @media screen and (max-width: $break-large) {
-                width: 50%;
+                width: 46%;
             }
             @media screen and (max-width: $break-small) {
-                width: 100%;
+                width: 96%;
             }
             article {
                 margin: 0;
                 width: 100%;
-                height: 300px;
-                background-size: auto 100%;
-                background-repeat: no-repeat;
-                background-position: center center;
-                &:hover      {
-                    background-size: auto 110%;
-                    box-shadow: 0px 0 10px rgba(0,0,0,0.65);
-                    text-shadow: 0px 0px 40px rgba(37, 51, 62, 0.99);
-                    transition: all 0.4s ease-in-out;
+                @media screen and (min-width: $break-large) {
+                    min-height: 450px;
                 }
-                div { /* overlay */
-                    height: 100%;
-                    color: $white-color;
-                    background-color: $overlay-color;
-                    &:hover {
-                        background: rgba(0, 181, 226, 0.8);
-                        text-shadow: 0px 0px 40px rgba(0, 181, 226, 0.99);
-                        transition: all 0.4s ease-in-out;
+                @media screen and (max-width: $break-large) {
+                    min-height: 500px;
+                }
+                img {
+                    width: 100%;
+                }
+                color: $text-color;
+                h1 {
+                    font-size: 1.6rem;
+                    color: $heading-color;
+                }
+                p {
+                    font-size: 1rem;
+                    color: $text-color;
+                    span {
+                        margin-left: 1rem;
                     }
-                    h1 {
-                        font-size: 1.6rem;
-                        line-height: 2.5rem;
-                        padding: 2.2222rem;
-                        color: $white-color;
-                    }
-                    p {
-                        font-size: 1rem;
-                        padding: 4.2222rem 2.2222rem 2.2222rem 2.2222rem;
-                    }
+                }
+                p.meta {
+                    color: $light-text-color;
                 }
             }
         }
