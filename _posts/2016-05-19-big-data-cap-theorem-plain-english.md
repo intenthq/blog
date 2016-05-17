@@ -2,13 +2,12 @@
 layout: post
 title:  BigData and CAP theorem in plain english
 date:   2016-05-19 17:20:56
-excerpt: Demitifying BigData and the CAP theorem. Trying to understand them by means of a metaphor.
+excerpt: Demystifying BigData and the CAP theorem. Trying to understand them by means of a metaphor.
 image: /assets/images/big-data-cap-theorem/library-title.jpg
 thumbnail: /assets/images/big-data-cap-theorem/library-thumbnail.jpg
 categories: engineering
 author: Albert Pastrana
 ---
-
 
 > Are you a troubled developer because your boss heard about BigData and is asking you about it?
 
@@ -43,27 +42,25 @@ And yes, your guess is correct, creating a library network and adding more nodes
 ### Sharding
 Now that you have multiple buildings you need to take some important decisions. The first one is to decide how to distribute your books among the different libraries (sharding[^shard]).
 
-One possible and easy solution would be to distribute them by author. Books of authors whose lastname starts with A, B, C or D go to building number 1. Authors with lastname starting with E, F, G or H go to building number 2 and so on.
+One possible and easy solution would be to distribute them by author. Books of authors whose surname starts with A, B, C or D go to building number 1. Authors with surname starting with E, F, G or H go to building number 2 and so on.
 
-You soon realise a problem with that approach. The authors lastnames are not distributed equally and some authors (like Terry Pratchet) have written many more books than others. The implication is that some of your buildings are half empty while some others are too busy.
+You soon realise a problem with that approach. The authors surnames are not distributed equally and some authors (like Terry Pratchet) have written many more books than others. The implication is that some of your buildings are half empty while some others are too busy.
 
 You need to choose a better criterion (partition or shard key) that is easy to compute and well distributed. There are several options and there is not a good answer that will work in any scenario (it will depend on how your index is created, what queries can you do, what are the most common queries people is doing...). But, as an example, hashing the book title and using the modulus to decide which building the book is in would provide a better distribution of the books.
 
-(Image/code with an example!!!)
-
 ### Redundancy and replication factor
 
-One day you read about [what happened to the alexandrians](https://en.wikipedia.org/wiki/Destruction_of_the_Library_of_Alexandria) and think about what would happen if one of the buildings caughts fire. So you decide to buy extra copies of your books and put them in different buildings (redundancy).
+One day you read about [what happened to the alexandrians](https://en.wikipedia.org/wiki/Destruction_of_the_Library_of_Alexandria) and think about what would happen if one of the buildings catches fire. So you decide to buy extra copies of your books and put them in different buildings (redundancy).
 
 Of course, this comes with a cost and implications, both of them will depend on how many copies you want to keep (replication factor) among others.
 
-Besides the obvious advantage of having backup copies of each book (you could have achieved that by simply having a warehouse), this new architecture has a major drawback, every time you receive a new edition of a book, you'll need to send the updated copy to each of he buildings -with a van, a truck, a train or a bycicle, but books (not yet) fly by themselves.
+Besides the obvious advantage of having backup copies of each book (you could have achieved that by simply having a warehouse), this new architecture has a major drawback: every time you receive a new edition of a book, you'll need to send the updated copy to each of the buildings with a van, a truck, a train or a bicycle (unfortunately, books don't yet send themselves!)
 
 ## CAP Theorem (aka Brewer's theorem)[^cap]
 
 Now that you have several buildings spread all over the city with the books distributed among them is when you'll start having troubles.
 
-Let's see what are the prolems that arise when you distribute your data by looking at different scenarios but, before that, we will define three desirable conditions that any library should fulfill.
+Let's see what are the problems that arise when you distribute your data by looking at different scenarios but, before that, we will define three desirable conditions that any library should fulfill.
 
 - _Consistent:_ the books (data) in your library should be consistent.
   That means that if a book has a new edition with some corrections, all the
@@ -81,7 +78,7 @@ Let's see what are the prolems that arise when you distribute your data by looki
 
 [Eric Brewer](http://www.cs.berkeley.edu/~brewer/) stated that it is impossible for a distributed ~~computer system~~ library to be consistent, available and tolerant to ~~network~~ road partitions at the same time. The concept that you have to choose "two out of three" was rapidly spread, although, as we'll see next, it can be misleading.
 
-### You can't choose any two
+### You can't choose any two
 
 As just mentioned, many people saw the CAP theorem as a simplification that stated that you had to choose between a system being CA, CP or AP, which was kind of misleading as the same Eric pointed out some years later[^cap2].
 
@@ -89,15 +86,19 @@ In a distributed system (like our library) you will almost always rely on someth
 
 In our example, you can't rely on the roads being always open, as it may snow, there may be a parade or a demonstration that doesn't allow you do go from one library to another.
 
-In the real world, if your system is in two different datacenters you must account for the likelihood of a network partition. The probability of a network problem is much lower if your entire system is in the same datacenter and you control it, but it's not impossible.
+In the real world, if your system is in two different data-centers you must account for the likelihood of a network partition. The probability of a network problem is much lower if your entire system is in the same datacenter and you control it, but it's not impossible.
 
-The conclusion that comes from all the above is simple. If you want to be tolerant of not being able to communicate with the other libraries, in case of a network problem you will have two options:
+The conclusion that comes from all the above is simple. If you want your libraries to be tolerant of not being able to communicate with each other, you'll need to plan what to do in case of a network problem:
 
-- You tell your users the book they are requesting is not available. (Availability)
-- You tell your users you have the book they are requesting, but you don't know if it's the latest edition. (Consistency)
+- Tell your users the book they are requesting is not available. (Availability)
 
-This is (again) a bit misleading as your system doesn't need to choose between being consistent or available and it's usually something more of a balance between consitency and availability. But that's probably for another post.
+- Tell your users you have the book they are requesting, but you
+  don't know if it's the latest edition. (Consistency)
 
+This is (again) a bit misleading as your system doesn't need to choose between being consistent or available and the approach taken by most modern solutions is to have a balance between consistency and availability. But that's probably a discussion for another post, this one is already too long.
+
+
+_[Library picture](https://www.pexels.com/photo/library-university-books-students-12064/) by [Tamás Mészáros](https://www.pexels.com/u/repuding/) is licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)_
 
 _[Scafoling picture](https://www.flickr.com/photos/gagilas/8094965097/) by [Gagilas](https://www.flickr.com/photos/gagilas/) is licensed under [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)_
 
