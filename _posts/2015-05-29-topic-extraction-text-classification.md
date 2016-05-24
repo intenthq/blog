@@ -53,11 +53,12 @@ Another promising approach is to use **named linked entities as text features**,
 
 This last approach requires a good entity linking engine. As you may be aware from the post [‘Topic Graph Works’](https://www.intenthq.com/topic-graph-works)  by Phil Messenger on the Intent HQ company blog, Intent HQ topic graph is a data structure which encodes millions of concepts and links them based on ontological, categorical, semantic and affinity based relationships. It also exposes a topic extraction API, which you can use for entity linking (as described above), and then run classification algorithms on using extracted topics (named entities) as features.
 
-####*Bibliography*
+#### Bibliography
 1. Král, P. (2014). Named Entities as new Features for Czech Document Classification. In Computational Linguistics and
 Intelligent Text Processing (pp. 417-427). Springer Berlin Heidelberg.
 
 2. Yang, Y., & Pedersen, J. O. (1997, July). A comparative study on feature selection in text categorization. In ICML (Vol. 97, pp. 412-420).
+
 3. Mihalcea, R., & Csomai, A. (2007, November). Wikify!: linking documents to encyclopedic knowledge. In Proceedings of the
 sixteenth ACM conference on Conference on information and knowledge management (pp. 233-242). ACM.
 

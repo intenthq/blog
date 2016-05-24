@@ -111,11 +111,11 @@ Redis fitted our needs well as it allowed us to run arbitrary scripts using Lua;
 
 We ran into one limitation with Redis: at the time of coding, the Lua bitops library provided by Redis didn't provide appropriate bit shift operations, something we needed to compose the 64-bit ID in pure Lua. As such, we currently call to Redis with the Lua script to get the components which make up the ID (time, logical shard ID, sequence) and bit shift them all together in the client-library (which is currently written in Java).
 
-{% highlight java %}
+```java
 long id = ((timestamp - CUSTOM_EPOCH) << TIMESTAMP_SHIFT)
        | (logicalShardId << LOGICAL_SHARD_ID_SHIFT)
        | sequence;
-{% endhighlight %}
+```
 
 One final interesting aspect of Redis is that it does not actually support any form of distributed mode (although that will change when Redis cluster is released [^8]). As a result, we implement a naïve round-robin algorithm to cycle between a large, pool of Redis servers. This allows us to have full redundancy, and a relatively evenly distributed load across the servers.
 

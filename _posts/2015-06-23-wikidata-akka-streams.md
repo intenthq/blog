@@ -39,7 +39,7 @@ If we want to create a stream, the first thing we will need is a Source[^5]:
 In our case, this is the JSON Wikidata dump[^6] which comes in a single gzip compressed file as a (huge) JSON array. Luckily for us, each object is on a separate line in the file, so it can be easily read line by line and and processed independently.
 
 This is an extract showing what the dump looks like:
-{% highlight json %}
+```json
 [
 {"id":"Q1","type":"item", "aliases": ... },
 {"id":"Q8","type":"item","aliases": ... },
@@ -47,26 +47,26 @@ This is an extract showing what the dump looks like:
 {"id":"Q20022554","type":"item","descriptions": ... },
 {"id":"Q20022558","type":"item","descriptions": ... }
 ]
-{% endhighlight %}
+```
 
 The function that creates the source will need to make use of the Java io classes and would look something like this:
-{% highlight scala %}
+```scala
 def source(file: File): Source[String, Unit] = {
   val compressed = new GZIPInputStream(new FileInputStream(file), 65536)
   val source = ioSource.fromInputStream(compressed, "utf-8")
   Source(() => source.getLines()).drop(1)
 }
-{% endhighlight %}
+```
 
 ### Our first Flow: parsing the JSON
 
 Once we have the data source, we need to parse the JSON and extract the relevant pieces of it. In our case, we would like to map each item in the file into a case class that contains the information we need for this PoC:
 
-{% highlight scala %}
+```scala
 //id is the wikidata canonical id
 //sites is a map of titles indexed by language
 case class WikidataElement(id: String, sites: Map[String, String])
-{% endhighlight %}
+```
 
 In order to process data from a stream, we will need to create a Flow[^7]:
 
@@ -75,10 +75,10 @@ In order to process data from a stream, we will need to create a Flow[^7]:
 In our case, the flow will receive a `String` and will output a `WikidataElement`, so we will need to create a `Flow[String, WikidataElement]`. Another way of thinking about it is as a function `(String => WikidataElement)`.
 
 The resulting code could be something as simple as:
-{% highlight scala %}
+```scala
 def parseJson(langs: Seq[String]): Flow[String, WikidataElement, Unit] =
   Flow[String].map(line => parseItem(langs, line))
-{% endhighlight %}
+```
 
 Where `parseItem` is a function that parses a single line of the input file (an item element in the Wikidata JSON) and returns a `WikidataElement` filled with the titles for all the languages passed as a parameter.
 
@@ -86,18 +86,18 @@ It's important to note that this function won't be able to generate a `WikidataE
 
 That can be easily solved by returning an `Option[WikidataElement]` and by flattening the result. In Akka Streams, there is no `flatMap` but you can use `mapConcat` instead (note that it works only on `immutable.Seq[T]`) [^immutable-rc4].
 
-{% highlight scala %}
+```scala
 def parseItem(langs: Seq[String], line: String): Option[WikidataElement] = ???
 
 def parseJson(langs: Seq[String]): Flow[String, WikidataElement, Unit] =
   Flow[String].mapConcat(line => parseItem(langs, line).toList)
-{% endhighlight %}
+```
 
 Now, if we combine the source creation and the transformation, we can have a source that reads the file and transforms it into a stream of `WikidataElements`:
 
-{% highlight scala %}
+```scala
 val transformedSource = source(config.input).via(parseJson(config.languages))
-{% endhighlight %}
+```
 
 ### Adding a Sink: log every N elements
 
@@ -107,19 +107,19 @@ In the scenario we are considering for this simple PoC, we don't want to do anyt
 
 There are several ways of creating a `Sink`. For our purpose, we will fold over the stream to accumulate a counter that we will use to log a message every N elements. A possible implementation would be the following one:
 
-{% highlight scala %}
+```scala
 def logEveryNSink[T](n: Int) = Sink.fold(0) { (x, y: T) =>
   if (x % n == 0)
     println(s"Processing element $x: $y")
   x + 1
 }
-{% endhighlight %}
+```
 
 Putting all together, we have a one-liner that creates a source, transforms it by parsing the JSON and logs a message every 10K items:
 
-{% highlight scala %}
+```scala
 source(config.input).via(parseJson(config.languages)).to(logEveryNSink(10000)).run()
-{% endhighlight %}
+```
 
 You must be thinking now: "that's ok, but I can't see why you need that *** framework to parse and process a file".
 
@@ -131,7 +131,7 @@ Well, you are right. We could try to argue that Akka Streams is this or that. Bu
 
 Yep, we know, your CPU has N cores and you like all of them to be as busy as possible. Given that the process can be easilly parallelised, we only need to find how Akka Streams allow us do it. There are a couple of methods in the `Flow` class that can help us:
 
-{% highlight scala %}
+```scala
   /**
    * Transform this stream by applying the given function to each of
    * the elements as they pass through this processing step. (...)
@@ -147,7 +147,7 @@ Yep, we know, your CPU has N cores and you like all of them to be as busy as pos
    * downstream in the same order as received from upstream.
    */
   def mapAsyncUnordered[T](parallelism: Int)(f: Out ⇒ Future[T]): Repr[T, Mat]
-{% endhighlight %}
+```
 
 The choice is clear then, if you are not interested in the order (and we are not) then `mapAsyncUnordered` is the answer, as you will make the most of the parallelisation process.
 
@@ -162,13 +162,13 @@ We are not yet done (almost). In order to make it work we will need to:
 * Given that there is no `mapAsyncUnorderedConcat` or similar, we will need to make sure only the items correctly parsed are emitted in the resulting stream. We could compose `mapAsyncUnordered` results with `mapConcat(identity)` but, as we have already used `mapConcat`, we will use `collect` this time.
 
 The resulting method is still pretty simple though:
-{% highlight scala %}
+```scala
 def parseJson(langs: Seq[String])(implicit ec: ExecutionContext): Flow[String, WikidataElement, Unit] = {
   Flow[String].mapAsyncUnordered(8)(line => Future(parseItem(langs, line))).collect {
     case Some(v) => v
   }
 }
-{% endhighlight %}
+```
 
 [![An Icon For A Commit](/assets/images/commit.png) _View the commit for this section on GitHub_](https://github.com/intenthq/wikidata-akka-streams/commit/dce57805d745e009aa2283aaf1437ad4aa6dbbc3)
 
@@ -185,7 +185,7 @@ One easy way of doing this is to create a `Sink` that does the processing and fe
 
 In order to count the items we will need a `Flow` that emits true if all the titles in the items are the same or false otherwise and, after that, a `Sink` that folds the stream counting how many of them are the same and how many are not.
 
-{% highlight scala %}
+```scala
 def checkSameTitles(langs: Set[String]): Flow[WikidataElement, Boolean, Unit] = Flow[WikidataElement]
   .filter(_.sites.keySet == langs)
   .map { x =>
@@ -197,7 +197,7 @@ def count: Sink[Boolean, Future[(Int, Int)]] = Sink.fold((0,0)) {
   case ((t, f), true) => (t+1, f)
   case ((t, f), false) => (t, f+1)
 }
-{% endhighlight %}
+```
 
 #### Putting it all together
 
@@ -207,7 +207,7 @@ Now, in order to do be able to have two flows processing the same stream, we wil
 
 The `FlowGraph` object contains several methods that will help us creating a graph. Given that our graph is fully connected and that we want to have access to the results of the count sink from the outside the resulting code would be similar to this one:
 
-{% highlight scala %}
+```scala
 val elements = source(config.input).via(parseJson(config.langs))
 
 val graph = FlowGraph.closed(count) { implicit b =>
@@ -219,7 +219,7 @@ val graph = FlowGraph.closed(count) { implicit b =>
                 broadcast ~> checkSameTitles(config.langs.toSet) ~> sinkCount
   }
 }
-{% endhighlight %}
+```
 
 [![An Icon For A Commit](/assets/images/commit.png) _View the commit for this section on GitHub_](https://github.com/intenthq/wikidata-akka-streams/commit/9d0a00564b95abbf31580d0c28b7ac89b8fd16b9)
 
