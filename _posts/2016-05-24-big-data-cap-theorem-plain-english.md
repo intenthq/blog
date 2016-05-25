@@ -44,7 +44,7 @@ Now that you have multiple buildings you need to make some important decisions. 
 
 One possible and easy solution would be to distribute them by author. Books of authors whose surname starts with A, B, C or D go to building number 1. Authors with surname starting with E, F, G or H go to building number 2 and so on.
 
-You soon realise a problem with that approach. The authors surnames are not distributed equally and some authors (like Terry Pratchet) have written many more books than others. The implication is that some of your buildings are half empty while some others are too busy.
+You soon realise a problem with that approach. The authors surnames are not distributed equally and some authors (like Terry Pratchett) have written many more books than others. The implication is that some of your buildings are half empty while some others are too busy.
 
 You need to choose a better criterion (partition or shard key) that is easy to compute and well distributed. There are several options and there is not a good answer that will work in any scenario (it will depend on how your index is created, what queries can you do, what are the most common queries people is doing...). However, as an example, hashing the book title and using the modulus to decide which building the book is in would provide a better distribution of the books.
 
