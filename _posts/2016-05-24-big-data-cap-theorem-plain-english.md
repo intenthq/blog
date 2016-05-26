@@ -104,8 +104,8 @@ _[Scafoling picture](https://www.flickr.com/photos/gagilas/8094965097/) by [Gagi
 
 ## References
 
-[^other]: Kaushik Sathupadi already did something similar some time ago: [http://ksat.me/a-plain-english-introduction-to-cap-theorem/]()
-[^scale]: [https://en.wikipedia.org/wiki/Scalability#Horizontal\_and\_vertical\_scaling]()
-[^shard]: [https://en.wikipedia.org/wiki/Sharding]()
-[^cap]: [https://en.wikipedia.org/wiki/CAP_theorem]()
+[^other]: Kaushik Sathupadi already did something similar some time ago: [http://ksat.me/a-plain-english-introduction-to-cap-theorem/](http://ksat.me/a-plain-english-introduction-to-cap-theorem/)
+[^scale]: [https://en.wikipedia.org/wiki/Scalability#Horizontal\_and\_vertical\_scaling](https://en.wikipedia.org/wiki/Scalability#Horizontal\_and\_vertical\_scaling)
+[^shard]: [https://en.wikipedia.org/wiki/Sharding](https://en.wikipedia.org/wiki/Sharding)
+[^cap]: [https://en.wikipedia.org/wiki/CAP_theorem](https://en.wikipedia.org/wiki/CAP_theorem)
 [^cap2]: Eric Brewer, ["CAP twelve years later: How the 'rules' have changed"](http://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed), IEEE Explore, Volume 45, Issue 2 (2012), pg. 23-29.
