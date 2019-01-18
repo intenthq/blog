@@ -7,7 +7,8 @@ default_image: /assets/favicon-128-128.png
 email: engineering@intenthq.com
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://engineering.intenthq.com" # the base hostname & protocol for your site
-include: _redirects
+include:
+  - _redirects
 twitter_username: intenthq
 github_username:  intenthq
 permalink: /:year/:month/:title/
